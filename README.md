@@ -49,6 +49,27 @@ pyChatGPT>=v0.3.8
 
 # 代码说明
 
+`pyChatGPT` 使用方法:
+
+```python
+from pyChatGPT import ChatGPT
+
+session_token = 'abc123'  # `__Secure-next-auth.session-token` cookie from https://chat.openai.com/chat
+api1 = ChatGPT(session_token)  # auth with session token
+api2 = ChatGPT(session_token, proxy='http://127.0.0.1:7890')  # specify proxy
+api3 = ChatGPT(auth_type='google', email='example@gmail.com', password='password') # auth with google login
+api4 = ChatGPT(session_token, verbose=True)  # verbose mode (print debug messages)
+
+resp = api1.send_message('Hello, world!')
+print(resp['message'])
+
+api1.reset_conversation()  # reset the conversation
+api1.close()  # close the session
+```
+
+
+项目主要代码:
+
 ```python
 ······
 
@@ -77,6 +98,20 @@ for i in range(3):
 在 `main.py` 中修改第87行的 `session_token` ，替换为你自己的即可。如果需要开启代理的话，把代理地址也换成你的。
 
 
+获取 `session_token` 的方法:
+
+1. 使用 Chrome 访问 `https://chat.openai.com/chat`, 登陆后按 `F12` 进入开发者界面
+2. 依次点击: `Application` > `Storage` > `Cookies` > `https://chat.openai.com` , 查找 `__Secure-next-auth.session-token`
+3. 复制 `Cookie Value` 字段的值
+
+<img src="data/pics/session_token.png" style="height:50%;"></img>
+
+# 启动方式
+
+`python main.py`
+
+运行完成后的问答对在 `data/gen_data` 下方，也可以通过日志文件 `logs/chatgpt.log` 查找请求的文本内容及响应的文本，处理后即可得到 `ChatGPT` 生成的问答对。
+
 # 结果展示
 
-</img src="data/pics/chatgpt_qag.png"></img>
+<img src="data/pics/chatgpt_qag.png" style="height:50%;"></img>
