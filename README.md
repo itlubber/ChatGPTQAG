@@ -2,6 +2,8 @@
 
 > 通过调用 OpenAI 的 ChatGPT 网页接口来获取响应的内容
 
+> 本项目逆向接口目前可能无法使用，诸位参照 [acheong08/ChatGPT](https://github.com/acheong08/ChatGPT) 提供的逆向接口可以直接使用
+
 # 项目结构
 
 ```
